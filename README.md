@@ -24,5 +24,4 @@ Uncaught DOMException: Failed to execute 'createElement' on 'Document': The tag 
     at j (http://localhost:8080/app.951e12a3fd9b200472cf.js:1:7401)
 ```
 Possible cause:
- - It seems as if `react-day-picker` `nodeName` [comes in as an object here] (https://github.com/developit/preact/blob/master/src/vdom/diff.js#L116)
- 
+ - It seems as if `react-day-picker` `nodeName` [comes in as an object here](https://github.com/developit/preact/blob/master/src/vdom/diff.js#L116)
