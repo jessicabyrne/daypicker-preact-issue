@@ -1,3 +1,4 @@
+require('preact/debug');
 import React from 'react';
 import { render } from 'react-dom';
 import DayPicker from 'react-day-picker';

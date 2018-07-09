@@ -13,6 +13,7 @@ module.exports = {
     app: path.join(__dirname, '/src/index.jsx'),
   },
   mode: 'production',
+  devtool: 'source-map',
   output: {
     filename: '[name].[hash].js',
     path: outputPath,
