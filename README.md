@@ -6,7 +6,7 @@ How to repo:
 ```shell
 npm i
 npm run build
-npm start
+npm start # launches a web browser
 ```
 
 Have a look in the console and you'll see this error:
