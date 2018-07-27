@@ -6,7 +6,8 @@
   "scripts": {
     "build-dev": "webpack --config webpack-dev.js",
     "build": "webpack --config webpack-prod.js",
-    "start": "./node_modules/.bin/http-server public"
+    "start-server": "./node_modules/.bin/http-server public",
+    "start": "npm run build && concurrently --kill-others-on-fail 'npm run start-server' 'sleep 2; open http://localhost:8080'"
   },
   "keywords": [],
   "author": "",

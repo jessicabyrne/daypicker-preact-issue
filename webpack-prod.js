@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const outputPath = path.join(__dirname, '/public');
 
@@ -13,11 +14,43 @@ module.exports = {
     app: path.join(__dirname, '/src/index.jsx'),
   },
   mode: 'production',
-  devtool: 'source-map',
   output: {
-    filename: '[name].[hash].js',
+    filename: '[hash].[name].js',
+    chunkFilename: '[hash].[name].js',
     path: outputPath,
     publicPath: '/',
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        // Create a separate chunk for preact to apply slightly different
+        // Uglify options on it.
+        preact: {
+          name: 'preact',
+          chunks: 'all',
+          minSize: 0,
+          test: /[\\/]preact[\\/]/,
+          priority: 99,
+        },
+      },
+    },
+    minimizer: [
+      // Prevent function reduction in preact for preact-compat to work.
+      new UglifyJsPlugin({
+        include: /preact\.js$/,
+        uglifyOptions: {
+          compress: {
+            reduce_funcs: false,
+          },
+        },
+      }),
+      // Normal uglifying for everything else.
+      new UglifyJsPlugin({
+        exclude: /preact\.js$/,
+        cache: true,
+        parallel: true,
+      }),
+    ],
   },
   module: {
     rules: [
@@ -58,7 +91,7 @@ module.exports = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
+      filename: '[hash].[name].css',
     }),
     new OptimizeCssAssetsPlugin(),
     new HtmlWebpackPlugin(),
