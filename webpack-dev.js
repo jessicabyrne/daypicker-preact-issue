@@ -21,6 +21,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
@@ -39,10 +44,10 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: ['.mjs','.js', '.jsx', '.css'],
     alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat',
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
     },
   },
   plugins: [
