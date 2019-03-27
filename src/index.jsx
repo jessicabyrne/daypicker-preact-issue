@@ -1,12 +1,11 @@
 require('preact/debug');
 import React from 'react';
 import { render } from 'react-dom';
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import MyDayPickerExample from './Daypicker';
 
 const startApp = () => render(
   <div>
-    <DayPicker />
+    <MyDayPickerExample />
   </div>,
   document.body
 );
