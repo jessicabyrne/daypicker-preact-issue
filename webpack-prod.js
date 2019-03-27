@@ -25,10 +25,6 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: {
-          compact: true,
-          presets: ['env'],
-        },
       },
       {
         test: /\.(styl|css)$/,
